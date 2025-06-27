@@ -29,6 +29,13 @@
       "url": "https://github.com/FunkinCrew/flixel-text-input"
     },
     {
+      "name": "flixel-ui",
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/HaxeFlixel/flixel-ui"
+    },
+    {
       "name": "flxanimate",
       "type": "git",
       "dir": null,
