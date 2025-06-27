@@ -122,6 +122,36 @@ class Character extends FlxSprite
 				updateHitbox();
 				antialiasing = false;
 
+			case 'gf-whitty':
+				tex = Paths.getSparrowAtlas('GF_Standing_Sway', 'bonusWeek');
+				frames = tex;
+				animation.addByPrefix('sad', 'Sad', 24, false);
+				animation.addByPrefix('danceLeft', 'Idle Left', 24, false);
+				animation.addByPrefix('danceRight', 'Idle Right', 24, false);
+				animation.addByPrefix('scared', 'Scared', 24, false);
+
+				addOffset('sad', -140, -153);
+				addOffset('danceLeft', -140, -153);
+				addOffset('danceRight', -140, -153);
+				addOffset('scared', -140, -153);
+
+				playAnim('danceRight');
+
+			case 'gf-whitty-zoom':
+				tex = Paths.getSparrowAtlas('GF_Standing_ZOOOOOOOOOOOOOOM', 'bonusWeek');
+				frames = tex;
+				animation.addByPrefix('sad', 'Sad', 24, false);
+				animation.addByPrefix('danceLeft', 'Idle Left', 24, false);
+				animation.addByPrefix('danceRight', 'Idle Right', 24, false);
+				animation.addByPrefix('scared', 'Scared', 24, false);
+	
+				addOffset('sad', -140, -153);
+				addOffset('danceLeft', -140, -153);
+				addOffset('danceRight', -140, -153);
+				addOffset('scared', -140, -153);
+	
+				playAnim('danceRight');
+
 			case 'dad':
 				// DAD ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('DADDY_DEAREST');
@@ -267,6 +297,45 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'bf':
+				var tex = Paths.getSparrowAtlas('BOYFRIEND');
+				frames = tex;
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -30, 21);
+				addOffset("singLEFTmiss", 12, 24);
+				addOffset("singDOWNmiss", -11, -19);
+				addOffset("hey", 7, 4);
+				addOffset('firstDeath', 37, 11);
+				addOffset('deathLoop', 37, 5);
+				addOffset('deathConfirm', 37, 69);
+				addOffset('scared', -4);
+
+				playAnim('idle');
+
+				flipX = true;
+
+			case 'bf-whitty':
 				var tex = Paths.getSparrowAtlas('BOYFRIEND');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
@@ -495,6 +564,37 @@ class Character extends FlxSprite
 				addOffset("singDOWN-alt", -30, -27);
 
 				playAnim('idle');
+
+			case 'whitty': // whitty reg (lofight,overhead)
+				tex = Paths.getSparrowAtlas('WhittySprites', 'bonusWeek');
+				frames = tex;
+				animation.addByPrefix('idle', 'Idle', 24);
+				animation.addByPrefix('singUP', 'Sing Up', 24);
+				animation.addByPrefix('singRIGHT', 'Sing Right', 24);
+				animation.addByPrefix('singDOWN', 'Sing Down', 24);
+				animation.addByPrefix('singLEFT', 'Sing Left', 24);
+
+				addOffset('idle', 0,0 );
+				addOffset("singUP", -6, 50);
+				addOffset("singRIGHT", 0, 27);
+				addOffset("singLEFT", -10, 10);
+				addOffset("singDOWN", 0, -30);
+
+			case 'whittyCrazy': // whitty crazy (ballistic)
+				tex = Paths.getSparrowAtlas('WhittyCrazy', 'bonusWeek');
+				frames = tex;
+				animation.addByPrefix('idle', 'Whitty idle dance', 24);
+				animation.addByPrefix('singUP', 'Whitty Sing Note UP', 24);
+				animation.addByPrefix('singRIGHT', 'whitty sing note right', 24);
+				animation.addByPrefix('singDOWN', 'Whitty Sing Note DOWN', 24);
+				animation.addByPrefix('singLEFT', 'Whitty Sing Note LEFT', 24);
+
+				addOffset('idle', 50);
+				addOffset("singUP", 50, 85);
+				addOffset("singRIGHT", 100, -75);
+				addOffset("singLEFT", 50);
+				addOffset("singDOWN", 75, -150);
+
 		}
 
 		dance();
