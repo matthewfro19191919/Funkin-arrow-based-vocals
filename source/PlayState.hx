@@ -229,6 +229,12 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
 			case 'thorns':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
+			case 'lo-fight' | 'lo-fight-b-side':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('lo-fight/pleaseSubscribe'));
+			case 'overhead' | 'overhead-b-side':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('overhead/pleaseSubscribe'));
+			case 'ballistic' | 'ballistic-b-side':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('ballistic/pleaseSubscribe'));
 		}
 
 		#if desktop
@@ -847,6 +853,19 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'thorns':
 					schoolIntro(doof);
+				case 'lo-fight':
+					trace('lo-fight animation');
+					whittyAnimation(doof, false);
+				case 'overhead':
+					whittyAnimation(doof, false);
+				case 'ballistic':
+					whittyAnimation(doof, false);
+				case 'b-lo-fight':
+					whittyAnimation(doof, true);
+				case 'b-overhead':
+					whittyAnimation(doof, true);
+				case 'b-ballistic':
+					whittyAnimation(doof, true);
 				default:
 					startCountdown();
 			}
@@ -861,6 +880,343 @@ class PlayState extends MusicBeatState
 		}
 
 		super.create();
+	}
+
+
+
+	function whittyAnimation(?dialogueBox:DialogueBox, bside:Bool):Void
+	{
+		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.fromRGB(19, 0, 0));
+		black.scrollFactor.set();
+		var black2:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black2.scrollFactor.set();
+		black2.alpha = 0;
+		var black3:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black3.scrollFactor.set();
+		if (curSong.toLowerCase() != 'ballistic')
+			add(black);
+
+		var epic:Bool = false;
+		var white:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.WHITE);
+		white.scrollFactor.set();
+		white.alpha = 0;
+
+		trace('what animation to play, hmmmm');
+
+		var wat:Bool = true;
+
+		trace('cur song: ' + curSong);
+
+		switch(curSong.toLowerCase()) // WHITTY ANIMATION CODE LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		{
+			case 'ballistic' | 'ballistic-b-side':
+				trace('funny ballistic!!!');
+				add(white);
+				trace(white);
+				var noMore:Bool = false;
+				inCutscene = true;
+
+				var wind:FlxSound = new FlxSound().loadEmbedded(Paths.sound('windLmao', 'shared'),true);
+				var mBreak:FlxSound = new FlxSound().loadEmbedded(Paths.sound('micBreak', 'shared'));
+				var mThrow:FlxSound = new FlxSound().loadEmbedded(Paths.sound('micThrow', 'shared'));
+				var mSlam:FlxSound = new FlxSound().loadEmbedded(Paths.sound('slammin', 'shared'));
+				var TOE:FlxSound = new FlxSound().loadEmbedded(Paths.sound('ouchMyToe', 'shared'));
+				var soljaBOY:FlxSound = new FlxSound().loadEmbedded(Paths.sound('souljaboyCrank', 'shared'));
+				var rumble:FlxSound = new FlxSound().loadEmbedded(Paths.sound('rumb', 'shared'));
+
+				remove(dad);
+				var animation:FlxSprite = new FlxSprite(-480,-100);
+				animation.frames = Paths.getSparrowAtlas('cuttinDeezeBalls', 'bonusWeek');
+				animation.animation.addByPrefix('startup', 'Whitty Ballistic Cutscene', 24, false);
+				animation.antialiasing = true;
+				add(animation);
+
+				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+
+				remove(funneEffect);
+
+				wind.fadeIn();
+				camHUD.visible = false;
+
+				new FlxTimer().start(0.01, function(tmr:FlxTimer)
+					{
+						// animation
+
+						if (!wat)
+							{
+								tmr.reset(1.5);
+								wat = true;
+							}
+						else
+						{
+
+						
+						if (animation.animation.curAnim == null) // check thingy go BEE BOOP
+							{
+								animation.animation.play('startup'); // if beopoe then make go BEP
+								trace('start ' + animation.animation.curAnim.name);
+							}
+						if (!animation.animation.finished && animation.animation.curAnim.name == 'startup') // beep?
+						{
+							tmr.reset(0.01); // fuck
+							noMore = true; // fuck outta here animation
+							trace(animation.animation.frameIndex);
+							switch(animation.animation.frameIndex)
+							{
+								case 87:
+									if (!mThrow.playing)
+										mThrow.play();
+								case 86:
+									if (!mSlam.playing)
+										mSlam.play();
+								case 128:
+									if (!soljaBOY.playing)
+										{
+											soljaBOY.play();
+											remove(wstageFront);
+											nwBg.alpha = 1;
+											wBg.alpha = 0;
+											nwBg.animation.play('gaming');
+											camFollow.camera.shake(0.01, 3);
+										}
+								case 123:
+									if (!rumble.playing)
+										rumble.play();
+								case 135:
+									camFollow.camera.stopFX();
+								case 158:
+									if (!TOE.playing)
+									{
+										TOE.play();
+										camFollow.camera.stopFX();
+										camFollow.camera.shake(0.03, 6);
+									}
+								case 52:
+									if (!mBreak.playing)
+										{
+											mBreak.play();
+										}
+							}
+						}
+						else
+						{
+							// white screen thingy
+
+							camFollow.camera.stopFX();
+
+							if (white.alpha < 1 && !epic)
+							{
+								white.alpha += 0.4;
+								tmr.reset(0.1);
+							}
+							else
+							{
+								if (!epic)
+									{
+										epic = true;
+										trace('epic ' + epic);
+										turnToCrazyWhitty();
+										remove(animation);
+										TOE.fadeOut();
+										tmr.reset(0.1);
+										nwBg.animation.play("gameButMove");
+									}
+								else
+									{
+										if (white.alpha != 0)
+											{
+
+												white.alpha -= 0.1;
+												tmr.reset(0.1);
+											}
+										else 
+										{
+											if (dialogueBox != null)
+												{
+													camHUD.visible = true;
+													wind.fadeOut();
+													healthBar.visible = false;
+													healthBarBG.visible = false;
+													scoreTxt.visible = false;
+													iconP1.visible = false;
+													iconP2.visible = false;
+													add(dialogueBox);
+												}
+												else
+												{
+													startCountdown();
+												}
+												remove(white);
+										}
+									}
+							}
+						}
+					}
+					});
+			case 'lo-fight' | 'lo-fight-b-side':
+				trace('funny lo-fight!!!');
+				inCutscene = true;
+				remove(dad);
+				var animation:FlxSprite = new FlxSprite(-290,-100);
+				animation.frames = Paths.getSparrowAtlas('whittyCutscene','bonusWeek');
+				animation.animation.addByPrefix('startup', 'Whitty Cutscene Startup ', 24, false);
+				animation.antialiasing = true;
+				add(animation);
+				black2.visible = true;
+				black3.visible = true;
+				add(black2);
+				add(black3);
+				black2.alpha = 0;
+				black3.alpha = 0;
+				trace(black2);
+				trace(black3);
+
+				var city:FlxSound = new FlxSound().loadEmbedded(Paths.sound('city', 'shared'), true);
+				var rip:FlxSound = new FlxSound().loadEmbedded(Paths.sound('rip', 'shared'));
+				var fire:FlxSound = new FlxSound().loadEmbedded(Paths.sound('fire', 'shared'));
+				var BEEP:FlxSound = new FlxSound().loadEmbedded(Paths.sound('beepboop', 'shared'));
+				city.fadeIn();
+				camFollow.setPosition(dad.getMidpoint().x + 40, dad.getMidpoint().y - 180);
+
+				camHUD.visible = false;
+
+				gf.y = 90000000;
+				boyfriend.x += 314;
+
+				new FlxTimer().start(0.01, function(tmr:FlxTimer)
+					{
+
+						if (!wat)
+							{
+								tmr.reset(3);
+								wat = true;
+							}
+						else
+						{
+						// animation
+
+						black.alpha -= 0.15;
+			
+						if (black.alpha > 0)
+						{
+							tmr.reset(0.3);
+						}
+						else
+						{
+
+							if (animation.animation.curAnim == null)
+								animation.animation.play('startup');
+
+							if (!animation.animation.finished)
+								{
+									tmr.reset(0.01);
+									trace('animation at frame ' + animation.animation.frameIndex);
+
+									switch(animation.animation.frameIndex)
+									{
+										case 0:
+											trace('play city sounds');
+										case 41:
+											trace('fire');
+											if (!fire.playing)
+												fire.play();
+										case 34:
+											trace('paper rip');
+											if (!rip.playing)
+												rip.play();
+										case 147:
+											trace('BEEP');
+											if (!BEEP.playing)
+												{
+													camFollow.setPosition(dad.getMidpoint().x + 460, dad.getMidpoint().y - 100);
+													BEEP.play();
+													boyfriend.playAnim('singLEFT', true);
+												}
+										case 154:
+											if (boyfriend.animation.curAnim.name != 'idle')
+												boyfriend.playAnim('idle');
+									}
+								}
+							else
+							{
+								// CODE LOL!!!!
+								if (black2.alpha != 1)
+								{
+									black2.alpha += 0.4;
+									tmr.reset(0.1);
+									trace('increase blackness lmao!!!');
+								}
+								else
+								{
+									if (black2.alpha == 1 && black2.visible)
+										{
+											black2.visible = false;
+											black3.alpha = 1;
+											trace('transision ' + black2.visible + ' ' + black3.alpha);
+											remove(animation);
+											add(dad);
+											gf.y = 140;
+											boyfriend.x -= 314;
+											camHUD.visible = true;
+											tmr.reset(0.3);
+										}
+									else if (black3.alpha != 0)
+										{
+											black3.alpha -= 0.1;
+											tmr.reset(0.3);
+											trace('decrease blackness lmao!!!');
+										}
+										else 
+										{
+													if (dialogueBox != null)
+													{
+														add(dialogueBox);
+														city.fadeOut();
+													}
+													else
+													{
+														startCountdown();
+													}
+												remove(black);
+										}
+								}
+							}
+						}
+					}
+					});
+			default:
+				trace('funny *goat looking at camera*!!!');
+				new FlxTimer().start(0.3, function(tmr:FlxTimer)
+					{
+
+						if (!wat)
+							{
+								tmr.reset(3);
+								wat = true;
+							}
+
+						black.alpha -= 0.15;
+			
+						if (black.alpha > 0)
+						{
+							tmr.reset(0.3);
+						}
+						else
+						{
+		
+							if (dialogueBox != null)
+								{
+									inCutscene = true;
+									add(dialogueBox);
+								}
+							remove(black);
+						}
+					});
+			
+		}
+
+
+
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
