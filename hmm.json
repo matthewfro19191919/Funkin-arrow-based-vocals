@@ -64,6 +64,11 @@
       "url": "https://github.com/Dot-Stuff/flxanimate"
     },
     {
+      "name": "discord_rpc",
+      "type": "haxelib",
+      "version": "1.0.0"
+    },
+    {
       "name": "format",
       "type": "haxelib",
       "version": "3.5.0"
