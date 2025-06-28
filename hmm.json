@@ -47,7 +47,7 @@
       "type": "git",
       "dir": null,
       "ref": "master",
-      "url": " https://github.com/fponticelli/thx.core"
+      "url": "https://github.com/fponticelli/thx.core"
     },
     {
       "name": "jsonpatch",
