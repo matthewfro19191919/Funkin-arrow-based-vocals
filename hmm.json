@@ -36,6 +36,27 @@
       "url": "https://github.com/HaxeFlixel/flixel-ui"
     },
     {
+      "name": "newgrounds",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/Geokureli/Newgrounds"
+    },
+    {
+      "name": "thx.core",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": " https://github.com/fponticelli/thx.core"
+    },
+    {
+      "name": "jsonpatch",
+      "type": "git",
+      "dir": null,
+      "ref": "f9b83215acd586dc28754b4ae7f69d4c06c3b4d3",
+      "url": " https://github.com/EliteMasterEric/jsonpatch"
+    },
+    {
       "name": "flxanimate",
       "type": "git",
       "dir": null,
